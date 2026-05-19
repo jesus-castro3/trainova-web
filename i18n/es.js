@@ -6,6 +6,7 @@ export default {
 
   nav: {
     download: 'Descargar gratis',
+    switchLang: 'Switch to English',
   },
 
   hero: {
@@ -18,7 +19,7 @@ export default {
   },
 
   phone: {
-    dashboard: 'Dashboard',
+    dashboard: 'Panel',
     clients: 'Tus clientes',
     thisWeek: 'Esta semana',
     client1: 'María G.',
@@ -39,8 +40,14 @@ export default {
     logSet: 'Registrar serie →',
   },
 
+  notFound: {
+    title: 'Página no encontrada',
+    sub: 'El enlace puede haber expirado o la dirección estar incorrecta.',
+    cta: 'Ir al inicio',
+  },
+
   proof: {
-    stat1Value: '2 tap',
+    stat1Value: '2 toques',
     stat1Label: 'para registrar una serie',
     stat2Value: '∞',
     stat2Label: 'ejercicios en biblioteca',
@@ -75,7 +82,7 @@ export default {
       'Constructor de rutinas y programas multi-semana',
       'Generación de rutinas con IA en segundos',
       'Biblioteca de ejercicios con video demostración',
-      'Invita clientes por link o email',
+      'Invita clientes por enlace o correo',
       'Chat directo integrado',
     ],
     clientPill: 'Para el cliente',

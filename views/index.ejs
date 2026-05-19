@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="<%= lang %>">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trainova — <%= t.hero.headline1 %> <%= t.hero.headline2 %></title>
   <meta name="description" content="<%= t.hero.sub %>" />
   <meta property="og:title" content="Trainova" />
   <meta property="og:description" content="<%= t.hero.sub %>" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= host %>" />
   <%- include('partials/head') %>
   <style>
 
@@ -34,6 +33,7 @@
     .phone-btn { background:var(--gradient); border-radius:10px; padding:10px; text-align:center; font-size:11px; font-weight:700; color:#fff; margin-top:auto; }
     .phone-float { position:relative; }
     .phone-float .phone-2 { position:absolute; top:40px; left:150px; width:180px; height:360px; opacity:0.55; transform:rotate(6deg); }
+    @media(max-width:640px){ .phone-float .phone-2{display:none} }
 
     .how-it-works { padding:var(--space-3xl) 0; border-top:1px solid var(--border); }
     .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-xl); position:relative; }
@@ -69,7 +69,7 @@
     .testimonial-role { font-size:0.8125rem; color:var(--text-secondary); }
 
     .sticky-cta { display:none; position:fixed; bottom:0; left:0; right:0; padding:var(--space-md) var(--space-lg); background:rgba(26,26,46,0.95); backdrop-filter:blur(16px); border-top:1px solid var(--border); z-index:200; }
-    @media(max-width:640px){ .sticky-cta{display:block} }
+    @media(max-width:640px){ .sticky-cta{display:block} body{padding-bottom:80px} }
     .sticky-cta .btn-primary { width:100%; justify-content:center; }
   </style>
 </head>

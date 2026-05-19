@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <title>404 — Trainova</title>
+  <meta name="description" content="Page not found" />
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <div style="min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-xl);">
+    <div style="font-size:4rem;margin-bottom:var(--space-lg);">🏋️</div>
+    <h1 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:var(--space-md);">
+      <%= t.notFound.title %>
+    </h1>
+    <p style="color:var(--text-secondary);font-size:1.0625rem;max-width:400px;margin-bottom:var(--space-xl);">
+      <%= t.notFound.sub %>
+    </p>
+    <a href="/" class="btn-primary"><%= t.notFound.cta %></a>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

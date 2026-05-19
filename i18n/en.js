@@ -4,8 +4,15 @@ export default {
   langSwitch: 'ES',
   langSwitchCode: 'es',
 
+  notFound: {
+    title: 'Page not found',
+    sub: 'The link may have expired or the address may be incorrect.',
+    cta: 'Go home',
+  },
+
   nav: {
     download: 'Download free',
+    switchLang: 'Cambiar a español',
   },
 
   hero: {
