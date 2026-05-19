@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Te invitaron a Trainova</title>
+  <meta name="description" content="Tu entrenador te invitó a Trainova. Descarga la app y activa tu cuenta." />
+
+  <!-- Smart App Banner: passes the deep link back to the app on second tap -->
+  <% if (process.env.APP_ID) { %>
+  <meta name="apple-itunes-app" content="app-id=<%= process.env.APP_ID %>, app-argument=<%= deepLink %>">
+  <% } %>
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="invite-page">
+
+    <!-- Logo -->
+    <a href="/" style="margin-bottom: 32px; display:inline-block;">
+      <span style="font-size:1.25rem; font-weight:700; background: var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+        Trainova
+      </span>
+    </a>
+
+    <div class="invite-card">
+      <div class="invite-avatar">🏋️</div>
+
+      <h1>Tu entrenador te invitó</h1>
+      <p>Sigue estos pasos para activar tu cuenta y comenzar a entrenar.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Descarga Trainova</strong>
+            <span>Gratis en el App Store</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Abre este enlace</strong>
+            <span>Para activar tu cuenta con el código de tu entrenador</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary: App Store -->
+      <a href="<%= appStoreUrl %>" class="btn-primary" style="width:100%; justify-content:center; margin-bottom: var(--space-md);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Descargar en App Store
+      </a>
+
+      <div class="invite-divider">Ya tengo la app</div>
+
+      <!-- Secondary: open deep link directly -->
+      <a href="<%= deepLink %>" class="btn-ghost" style="width:100%; justify-content:center;">
+        Abrir en Trainova →
+      </a>
+    </div>
+
+    <p style="margin-top: var(--space-lg); font-size:0.8125rem; color: var(--text-secondary);">
+      ¿Problemas? Escríbenos a <a href="mailto:hola@trainova.fit" style="color: var(--accent-purple);">hola@trainova.fit</a>
+    </p>
+
+  </div>
+
+  <script>
+    // Attempt to open the app directly on page load (iOS only).
+    // Falls back gracefully — no error shown to the user.
+    const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
+    if (isIOS) {
+      const deepLink = '<%= deepLink %>'
+      const appStoreUrl = '<%= appStoreUrl %>'
+      const iframe = document.createElement('iframe')
+      iframe.style.display = 'none'
+      iframe.src = deepLink
+      document.body.appendChild(iframe)
+      // If app not installed, redirect to App Store after short delay
+      setTimeout(() => {
+        if (document.hidden || document.webkitHidden) return
+        window.location.href = appStoreUrl
+      }, 2500)
+    }
+  </script>
+
+</body>
+</html>

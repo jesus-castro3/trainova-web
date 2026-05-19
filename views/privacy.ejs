@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacidad — Trainova</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo gradient-text">Trainova</a>
+    </div>
+  </nav>
+
+  <main class="privacy-page">
+    <h1>Política de Privacidad</h1>
+    <p class="updated">Última actualización: mayo de 2026</p>
+
+    <p>
+      En Trainova nos tomamos muy en serio la privacidad de nuestros usuarios.
+      Esta política describe qué información recopilamos, cómo la usamos y tus derechos sobre ella.
+    </p>
+
+    <h2>1. Información que recopilamos</h2>
+    <p>Recopilamos la información que nos proporcionas directamente al registrarte y usar la app:</p>
+    <ul>
+      <li>Nombre y correo electrónico (para crear tu cuenta)</li>
+      <li>Rol en la app (entrenador o cliente)</li>
+      <li>Datos de entrenamiento (rutinas, series, pesos, métricas corporales)</li>
+      <li>Mensajes enviados a través del chat en la app</li>
+      <li>Token de notificaciones push (para enviarte recordatorios)</li>
+    </ul>
+
+    <h2>2. Cómo usamos tu información</h2>
+    <ul>
+      <li>Para proveer el servicio: autenticación, sincronización de datos y notificaciones</li>
+      <li>Para mejorar la experiencia: analíticas de uso internas y anonimizadas</li>
+      <li>Para comunicaciones de servicio: confirmación de email, recuperación de contraseña</li>
+    </ul>
+    <p>No vendemos tu información a terceros. Nunca.</p>
+
+    <h2>3. Almacenamiento y seguridad</h2>
+    <p>
+      Tus datos se almacenan en servidores de <a href="https://supabase.com" style="color: var(--accent-purple);">Supabase</a>
+      con control de acceso por fila (Row Level Security). Cada usuario solo puede acceder a sus propios datos.
+      Las contraseñas nunca se almacenan en texto plano.
+    </p>
+
+    <h2>4. Compartir información</h2>
+    <p>
+      Cuando un entrenador te invita como cliente, compartirá contigo:
+      rutinas, programas y mensajes de chat. Tú decides aceptar la invitación antes de que cualquier dato sea visible.
+    </p>
+    <p>No compartimos datos con terceros excepto los proveedores de infraestructura necesarios para operar el servicio (Supabase, Apple APNs).</p>
+
+    <h2>5. Tus derechos</h2>
+    <ul>
+      <li><strong>Acceso:</strong> puedes ver todos tus datos dentro de la app.</li>
+      <li><strong>Eliminación:</strong> puedes solicitar la eliminación de tu cuenta y todos tus datos escribiéndonos a hola@trainova.fit.</li>
+      <li><strong>Portabilidad:</strong> podemos entregarte una exportación de tus datos bajo solicitud.</li>
+    </ul>
+
+    <h2>6. Menores de edad</h2>
+    <p>
+      Trainova no está dirigido a menores de 13 años. No recopilamos intencionalmente
+      información de menores. Si identificamos una cuenta de un menor, la eliminaremos.
+    </p>
+
+    <h2>7. Cambios a esta política</h2>
+    <p>
+      Podemos actualizar esta política ocasionalmente. Te notificaremos por email o dentro de la app
+      ante cambios significativos. El uso continuo de Trainova implica la aceptación de la política vigente.
+    </p>
+
+    <h2>8. Contacto</h2>
+    <p>
+      ¿Preguntas sobre tu privacidad? Escríbenos a
+      <a href="mailto:hola@trainova.fit" style="color: var(--accent-purple);">hola@trainova.fit</a>
+    </p>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-logo gradient-text">Trainova</span>
+      <ul class="footer-links">
+        <li><a href="/privacy">Privacidad</a></li>
+        <li><a href="mailto:hola@trainova.fit">Contacto</a></li>
+      </ul>
+      <span class="footer-copy">© <%= new Date().getFullYear() %> Trainova</span>
+    </div>
+  </footer>
+
+</body>
+</html>
