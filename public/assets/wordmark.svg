@@ -1,0 +1,39 @@
+<svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wGrad" x1="0" y1="40" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#4ECDC4"/>
+    </linearGradient>
+    <linearGradient id="tGrad" x1="4" y1="36" x2="36" y2="4" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#4ECDC4"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0.424 0 0 0 0 0.388 0 0 0 0 1 0 0 0 0.4 0" result="cb"/>
+      <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="textGrad" x1="50" y1="40" x2="180" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#4ECDC4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon background -->
+  <rect width="40" height="40" rx="9" fill="#1A1A2E"/>
+
+  <!-- T mark -->
+  <g filter="url(#glow)">
+    <rect x="7" y="9" width="26" height="7.5" rx="2.5" fill="url(#tGrad)"/>
+    <rect x="16.25" y="9" width="7.5" height="22" rx="2.5" fill="url(#tGrad)"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="52" y="29"
+    font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+    font-size="22"
+    font-weight="800"
+    letter-spacing="-0.5"
+    fill="url(#textGrad)">Trainova</text>
+</svg>

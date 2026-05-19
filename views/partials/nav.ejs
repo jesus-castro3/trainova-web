@@ -1,6 +1,9 @@
 <nav>
   <div class="container nav-inner">
-    <a href="/" class="nav-logo gradient-text">Trainova</a>
+    <a href="/" class="nav-logo-link" aria-label="Trainova home">
+      <img src="/assets/logo-mark.svg" alt="" width="32" height="32" class="nav-icon" />
+      <span class="nav-wordmark gradient-text">Trainova</span>
+    </a>
     <div style="display:flex; align-items:center; gap: var(--space-md);">
       <a href="/lang/<%= t.langSwitchCode %>" class="lang-toggle" title="Switch language">
         <%= t.langSwitch %>

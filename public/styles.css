@@ -79,6 +79,26 @@ nav {
   justify-content: space-between;
 }
 
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+
+.nav-icon {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 7px;
+}
+
+.nav-wordmark {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* keep for any legacy usage */
 .nav-logo {
   font-size: 1.25rem;
   font-weight: 700;
