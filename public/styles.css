@@ -100,6 +100,17 @@ nav {
   color: #fff;
 }
 
+.lang-toggle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color 0.2s;
+}
+.lang-toggle:hover { color: var(--text-primary); }
+
 /* ── Hero ───────────────────────────────────────────────── */
 .hero {
   padding: var(--space-3xl) 0 var(--space-2xl);

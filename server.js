@@ -1,20 +1,76 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import en from './i18n/en.js'
+import es from './i18n/es.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
 const PORT = process.env.PORT || 3000
 
 const APP_STORE_URL = process.env.APP_STORE_URL || '#'
-const APP_SCHEME = process.env.APP_SCHEME || 'trainova'
-const APP_ID = process.env.APP_ID || 'YOUR_APP_ID'
-const TEAM_ID = process.env.TEAM_ID || 'YOUR_TEAM_ID'
-const BUNDLE_ID = process.env.BUNDLE_ID || 'com.trainova.Trainova'
+const APP_SCHEME   = process.env.APP_SCHEME   || 'trainova'
+const APP_ID       = process.env.APP_ID       || ''
+const TEAM_ID      = process.env.TEAM_ID      || 'YOUR_TEAM_ID'
+const BUNDLE_ID    = process.env.BUNDLE_ID    || 'com.trainova.Trainova'
 
+const translations = { en, es }
+
+// ── Middleware ────────────────────────────────────────────
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Detect language: cookie → Accept-Language header → default 'es'
+app.use((req, res, next) => {
+  const cookieLang = parseCookies(req).lang
+  const headerLang = (req.headers['accept-language'] || '')
+    .split(',')[0]
+    .split('-')[0]
+    .toLowerCase()
+
+  const lang = translations[cookieLang]
+    ? cookieLang
+    : translations[headerLang]
+      ? headerLang
+      : 'es'
+
+  res.locals.t           = translations[lang]
+  res.locals.lang        = lang
+  res.locals.appStoreUrl = APP_STORE_URL
+  res.locals.appleIcon   = () => `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`
+  next()
+})
+
+function parseCookies(req) {
+  const list = {}
+  const header = req.headers.cookie
+  if (!header) return list
+  header.split(';').forEach(cookie => {
+    const [key, ...rest] = cookie.trim().split('=')
+    list[key.trim()] = decodeURIComponent(rest.join('='))
+  })
+  return list
+}
+
+// ── Routes ────────────────────────────────────────────────
+
+// Language switch — sets cookie and redirects back
+app.get('/lang/:code', (req, res) => {
+  const { code } = req.params
+  if (translations[code]) {
+    const oneYear = 365 * 24 * 60 * 60
+    res.setHeader('Set-Cookie', `lang=${code}; Max-Age=${oneYear}; Path=/; SameSite=Lax`)
+  }
+  const referer = req.headers.referer || '/'
+  // Strip the query string to stay on same page cleanly
+  try {
+    const url = new URL(referer)
+    res.redirect(url.pathname)
+  } catch {
+    res.redirect('/')
+  }
+})
 
 // Apple App Site Association — required for Universal Links
 app.get('/.well-known/apple-app-site-association', (req, res) => {
@@ -25,23 +81,23 @@ app.get('/.well-known/apple-app-site-association', (req, res) => {
         {
           appIDs: [`${TEAM_ID}.${BUNDLE_ID}`],
           components: [
-            { '/': '/invite/*', comment: 'Client invite links' },
-            { '/': '/reset-password', comment: 'Password reset' }
-          ]
-        }
-      ]
-    }
+            { '/': '/invite/*',       comment: 'Client invite links' },
+            { '/': '/reset-password', comment: 'Password reset'      },
+          ],
+        },
+      ],
+    },
   })
 })
 
 app.get('/', (req, res) => {
-  res.render('index', { appStoreUrl: APP_STORE_URL })
+  res.render('index')
 })
 
 app.get('/invite/:token', (req, res) => {
   const { token } = req.params
-  const deepLink = `${APP_SCHEME}://invite/${token}`
-  res.render('invite', { token, deepLink, appStoreUrl: APP_STORE_URL })
+  const deepLink  = `${APP_SCHEME}://invite/${token}`
+  res.render('invite', { token, deepLink, appId: APP_ID })
 })
 
 app.get('/privacy', (req, res) => {
